@@ -1,0 +1,11 @@
+# Folders
+.git/
+__pycache__/
+migrations/
+static/
+
+# Environment files and folders
+.env 
+
+# SQLite files
+db.sqlite3
