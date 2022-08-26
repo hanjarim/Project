@@ -7,4 +7,4 @@ def CustomerComplaint(request):
         'form': form
     }
 
-    return render(request, 'complaintapp/complaint.html')
+    return render(request, 'complaintapp/complaint.html', context)
