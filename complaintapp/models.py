@@ -103,8 +103,8 @@ class Locations(models.Model):
 
 class Complaints(models.Model):
     class Categories(models.TextChoices): 
-        VOICE = 'VOICE', 'VOICE'
-        DATA = 'DATA', 'DATA'
+        VOICE = 'VOICE', 'Voice'
+        DATA = 'DATA', 'Data'
     
     details = models.CharField(max_length=150)
     category = models.CharField(
@@ -154,10 +154,18 @@ class Tasks(models.Model):
         verbose_name_plural = "Tasks"
 
     def __str__(self):
-        return self.details
+        return self.complaint.details
 
 class TaskActions(models.Model):
     task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
     details =  models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        # db_table = "taskactions"
+        verbose_name = "Task Action"
+        verbose_name_plural = "Task Actions"
+
+    def __str__(self):
+        return self.details
