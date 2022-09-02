@@ -9,25 +9,106 @@
     <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
     <script src="{% static '/js/bootstrap.bundle.min.js' %}" defer></script>
     <script src="{% static '/js/jquery-3.5.1.min.js' %}" defer></script>
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
-    <title>Billing Status Search</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <title>Network fault reporting</title>
 </head>
 
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Safaricom | Enterprise Billing Status </a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Safaricom | Network Reporting </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-nav">
           <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="">Sign out</a>
+            <a class="nav-link px-3" href="">Sign in</a>
           </div>
         </div>
-      </header>
+    </header>
 
-    <div class="s003">
-        <form action="" method="post">
+    <div class="wrapper">
+        <div class="title">
+            Network Complaint Form
+        </div>
+        
+        <div class="form" >
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="inputfield">
+                    <label for="">Phone</label>
+                    {{ form.phone }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Location</label>
+                    {{ form.location }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Land mark</label>
+                    {{ form.landmark }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Coordinates</label>
+                    {{ form.coordinates }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Category</label>
+                    {{ form.category }}
+                </div>
+                <div class="inputfield">
+                    <label for="">Details</label>
+                    {{ form.details }}
+                </div>
+                <div class="inputfield terms">
+                    <label class="check" for="">
+                        <input type="checkbox" name="" id="">
+                        <span class="checkmark"></span>
+                    </label>
+                    <p>Agree to terms and conditions</p>
+                </div>
+                <div class="inputfield">
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <form action="" method="post">
             {% csrf_token %}
             {% if messages %}
                 {% for message in messages %}
@@ -43,18 +124,41 @@
                 {% endfor %}
             {% endif %}
             <div class="inner-form">
-                <form action="" method="POST" id="complaintform">
-                    {% csrf_token %}
-                    <div class="input-group mb-3">
-                        {{ form }}
+                <div class=" ">
+                    <div class="input-select">
+                        {{ form.category }}
                     </div>
-                   
-                </form>
+                    <div>
+                        {{ form.phone }}
+                    </div>
+                    <div>
+                        {{ form.email }}
+                    </div>
+                    <div>
+                        {{ form.location }}
+                    </div>
+                    <div>
+                        {{ form.landmark }}
+                    </div>
+                    <div>
+                        {{ form.details }}
+                    </div>
+                </div>
+                <div class="input-field second-wrap">
+                    {{ form.phone }}
+                </div>
+                <div class="input-field third-wrap">
+                    <button class="btn-search" type="submit" id="submit">
+                        <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                          </svg>
+        
+                    </button>
+                </div>
             </div>
-        </form>
+        </form> -->
     </div>
-    <script src="{% static 'js/main.js' %}"></script>
-   
+    
 </body>
 </html>
 
