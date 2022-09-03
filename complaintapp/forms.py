@@ -1,5 +1,5 @@
 from django import forms
-from complaintapp.models import Complaints
+from complaintapp.models import Complaints, Tasks
 
 class ComplaintCaptureForm(forms.ModelForm):
     class Meta:
@@ -57,5 +57,53 @@ class ComplaintCaptureForm(forms.ModelForm):
             }),
         }
 
+class ComplaintViewForm(forms.ModelForm):
+    class Meta:
+        model = Complaints
+        fields = ['phone', 'email','location','landmark', 'coordinates', 'details', 'category']
+        read_only = ['date']
+        labels = {
+            'phone': 'Phone number',
+            'email': 'Email',
+            'location': 'Location',
+            'landmark': 'Landmark',
+            'coordinates': 'Coordinates',
+            'category': 'Category',
+            'details': 'Details'
+        }
 
-    
+        widgets = {
+            'phone': forms.TextInput(attrs={
+                'placeholder':'Phone number',
+                'disabled': 'readonly'
+            }),
+            'email': forms.TextInput(attrs={
+                'placeholder':'Email address',
+                'disabled': 'readonly'
+            }),
+            'location': forms.Select(attrs={
+                'disabled': 'readonly'
+            }),
+            'landmark': forms.TextInput(attrs={
+                'placeholder':'Land mark',
+                'disabled': 'readonly'
+            }),
+            'coordinates': forms.TextInput(attrs={
+                'placeholder':'S035 E45',
+                'disabled': 'readonly'
+            }),
+            'category': forms.Select(attrs={
+                'disabled': 'readonly'
+            }),
+            'details': forms.Textarea(attrs={
+                'cols':40, 'rows':15,
+                'placeholder': 'Describe the problem currently being experienced',
+                'class': 'textarea',
+                'disabled': 'readonly'
+            }),
+        }
+
+class CreateTaskForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['complaint']

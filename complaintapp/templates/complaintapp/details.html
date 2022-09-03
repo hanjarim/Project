@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <i class="bi bi-check-circle-fill"></i> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                    {% endif %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill"></i> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                        <div class="alert alert-info alert-dismissible" role="alert"> 
+                            <i class="bi bi-info-circle-fill"></i> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <input type="hidden" name="complaint" id="complaintid" value="{{ complaintid }}">
+            <input type="submit" name="save" id="save" value="Assign" class="btn btn-primary mb-5">
+    </form>
+    {% for field in details %}
+    <div class="mb-3">
+        {{ field.errors }}
+        {{ field.label_tag }}
+        {{ field }}                
+    </div>
+    {% endfor %}
+{% endblock content %}

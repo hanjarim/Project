@@ -10,8 +10,6 @@ class User(AbstractUser):
         CUSTOMER = 'CUSTOMER', 'CUSTOMER'
         CAREDESK = 'CAREDESK', 'CAREDESK'
 
-
-    name = models.CharField(max_length=255, blank=False, null=False)
     # what type of user are we
     usertype = models.CharField(
         choices=Types.choices,
