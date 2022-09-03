@@ -26,14 +26,15 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
+            {% for field in details %}
+                <div class="mb-3">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}                
+                </div>
+            {% endfor %}
             <input type="hidden" name="complaint" id="complaintid" value="{{ complaintid }}">
             <input type="submit" name="save" id="save" value="Assign" class="btn btn-primary mb-5">
     </form>
-    {% for field in details %}
-    <div class="mb-3">
-        {{ field.errors }}
-        {{ field.label_tag }}
-        {{ field }}                
-    </div>
-    {% endfor %}
+
 {% endblock content %}
