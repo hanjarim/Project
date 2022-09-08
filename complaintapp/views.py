@@ -4,12 +4,13 @@ from django.shortcuts import render, redirect
 from complaintapp.forms import (
     ComplaintCaptureForm, 
     ComplaintViewForm,
-    CreateTaskForm
+    CreateActionForm
 ) 
 from complaintapp.models import (
     Complaints, 
     Locations,
-    Tasks
+    Tasks,
+    TaskActions
 )
 
 User = get_user_model()
@@ -52,7 +53,7 @@ def CustomerComplaint(request):
 def Dashboard(request):
 
     # List all open complaints
-    ticket_qs = Complaints.objects.all()
+    ticket_qs = Complaints.objects.filter(status__icontains='open')
 
     context = {
         'complaints': ticket_qs
@@ -86,8 +87,7 @@ def ViewDetails(request, complaintid):
             # Add a new task
             engineer_obj = User.objects.get(username=request.user)
             complaint_obj = Complaints.objects.get(pk=request.POST['complaint'])
-            print("COMPLAINT", complaint_obj)
-
+            
             obj, create = Tasks.objects.get_or_create(
                 complaint=complaint_obj,
                 defaults={'user':engineer_obj, 'status':'PENDING'}
@@ -96,12 +96,10 @@ def ViewDetails(request, complaintid):
             if create:
                 text = "Task successfully assigned"
                 messages.success(request, text)
-                return redirect('complaintapp:details')
+               
             if not create:
                 text = "Task already assigned"
                 messages.success(request, text)
-                return redirect('complaintapp:details')
-
 
     except Exception as e:
         print(f"Error occured: {str(e)}")
@@ -109,11 +107,41 @@ def ViewDetails(request, complaintid):
     return render(request, 'complaintapp/details.html', context)
 
 
-def CreateTask(request):
-    if request.method == 'POST':
-        taskform = CreateTaskForm(request.POST)
+def ListPendingTasks(request):
+    pending_tasks_qs = Tasks.objects.filter(user=request.user.id,status='PENDING')
 
+    context = {
+        'pending_tasks': pending_tasks_qs
+    }
+
+    return render(request, 'complaintapp/tasklist.html', context)
+
+
+def AddTaskActions(request, taskid):
+    
+    task_qs = Tasks.objects.get(id=taskid)
+
+    info = {
+        'task': task_qs.id,
+    }
+
+    form = CreateActionForm(initial=info)
+    if request.method == "POST":
+        form = CreateActionForm(request.POST or None)
+       
+        # Add action 
         if form.is_valid():
-            # Add a new task
-            pass
-    return render(request, 'complaintapp/tasks.html', context)
+            print("VALID", request.POST)
+            form.save()
+        else:
+            print(form.errors)
+    
+    # List previous actions
+    actions_qs = TaskActions.objects.filter(task=task_qs.id)
+
+    context = {
+        'actionform': form,
+        'previousactions': actions_qs
+    }
+
+    return render(request, 'complaintapp/taskactions.html', context)
