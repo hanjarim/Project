@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+      
+        </tr>
+    </thead>
+    {% for task in pending_tasks %}
+    <tr>
+        <td>{{ task.id }}</td>
+        <td> <a href="{% url 'complaintapp:actions' task.id %}">{{ task }}</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
