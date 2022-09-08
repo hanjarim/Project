@@ -9,7 +9,10 @@ from complaintapp.models import (
 def post_save_update_status(sender, instance, created, *args, **kwargs):
     try:
         if created:
-            Complaints.objects.update(pk=instance.complaint.id).update(status="PENDING")
+            print(instance.complaint.id)
+            complaint_obj = Complaints.objects.get(id=instance.complaint.id)
+            complaint_obj.status = "PENDING"
+            complaint_obj.save()
        
     except Exception as e:
         print(f"An exception occured {str(e)}")
