@@ -1,5 +1,5 @@
 from django import forms
-from complaintapp.models import Complaints, Tasks
+from complaintapp.models import Complaints, Tasks, TaskActions
 
 class ComplaintCaptureForm(forms.ModelForm):
     class Meta:
@@ -103,7 +103,25 @@ class ComplaintViewForm(forms.ModelForm):
             }),
         }
 
-class CreateTaskForm(forms.ModelForm):
+class CreateActionForm(forms.ModelForm):
     class Meta:
-        model = Tasks
-        fields = ['complaint']
+        model = TaskActions
+        fields = ['task','details']
+
+        labels = {
+            'details': 'Information:'
+        }
+
+
+
+        widgets = {
+            'task': forms.Select(attrs={
+                'class': "form-select",
+                
+            }),
+            'details': forms.Textarea(attrs={
+                'cols':40, 'rows':15,
+                'placeholder': 'Describe the action taken',
+                'class': 'textarea'
+            })
+        }
