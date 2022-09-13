@@ -13,6 +13,12 @@ def post_save_update_status(sender, instance, created, *args, **kwargs):
             complaint_obj = Complaints.objects.get(id=instance.complaint.id)
             complaint_obj.status = "PENDING"
             complaint_obj.save()
+        if not created:
+            complaint_obj = Complaints.objects.get(id=instance.complaint.id)
+            complaint_obj.status = "CLOSED"
+            complaint_obj.save()
        
     except Exception as e:
         print(f"An exception occured {str(e)}")
+
+
