@@ -109,7 +109,7 @@ class CreateActionForm(forms.ModelForm):
         fields = ['task','details']
 
         labels = {
-            'details': 'Information:'
+            'details': ''
         }
 
 
@@ -122,6 +122,6 @@ class CreateActionForm(forms.ModelForm):
             'details': forms.Textarea(attrs={
                 'cols':40, 'rows':15,
                 'placeholder': 'Describe the action taken',
-                'class': 'textarea'
+                'class': 'textarea mb-3'
             })
         }
