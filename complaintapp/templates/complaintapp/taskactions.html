@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="POST">
+<form action="" method="POST" class="mb-3">
     {% csrf_token %}
 
     <div>
@@ -9,10 +9,18 @@
     <input type="submit" value="Add action" class="btn btn-primary">
 </form>
 
-<table>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Action details</th>
+            <th>Date</th>
+      
+        </tr>
+    </thead>
     {% for action in previousactions %}
         <tr>
             <td>{{ action.details }}</td>
+            <td>{{ action.created_at }}</td>
         </tr>
     {% endfor %}
 </table>
