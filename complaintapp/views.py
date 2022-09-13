@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from complaintapp.forms import (
     ComplaintCaptureForm, 
@@ -49,7 +50,6 @@ def CustomerComplaint(request):
 
     return render(request, 'complaintapp/complaint.html', context)
 
-
 def Dashboard(request):
 
     # List all open complaints
@@ -60,7 +60,6 @@ def Dashboard(request):
     }
 
     return render(request, 'complaintapp/dashboard.html', context)
-
 
 def ViewDetails(request, complaintid):
     try:
@@ -84,6 +83,7 @@ def ViewDetails(request, complaintid):
             'complaintid': complaint_qs.pk
         }
         if request.method == 'POST':
+            
             # Add a new task
             engineer_obj = User.objects.get(username=request.user)
             complaint_obj = Complaints.objects.get(pk=request.POST['complaint'])
@@ -106,7 +106,6 @@ def ViewDetails(request, complaintid):
 
     return render(request, 'complaintapp/details.html', context)
 
-
 def ListPendingTasks(request):
     pending_tasks_qs = Tasks.objects.filter(user=request.user.id,status='PENDING')
 
@@ -115,7 +114,6 @@ def ListPendingTasks(request):
     }
 
     return render(request, 'complaintapp/tasklist.html', context)
-
 
 def AddTaskActions(request, taskid):
     
@@ -132,6 +130,16 @@ def AddTaskActions(request, taskid):
         # Add action 
         if form.is_valid():
             print("VALID", request.POST)
+
+            # Check if close ticket is selected
+
+            if request.POST['CloseTicket'] in request.POST:
+                print("CLOSE THE TICKET")
+                # Get the current task, update the status to CLOSED
+                task_qs.status = "CLOSED"
+                task_qs.save()
+
+            
             form.save()
         else:
             print(form.errors)
@@ -139,9 +147,37 @@ def AddTaskActions(request, taskid):
     # List previous actions
     actions_qs = TaskActions.objects.filter(task=task_qs.id)
 
+
+
     context = {
         'actionform': form,
         'previousactions': actions_qs
     }
 
     return render(request, 'complaintapp/taskactions.html', context)
+
+
+def TicketStatus(request):
+    # Get count for the open, closed and pending tickets
+    # return a JSON object that will be used to render a chart
+    open_tickets = Complaints.objects.filter(status__icontains='OPEN').count()
+    closed_tickets = Complaints.objects.filter(status__icontains='CLOSED').count()
+    pending_tickets = Complaints.objects.filter(status__icontains='PENDING').count()
+
+    data = {
+        'OPEN': open_tickets,
+        'CLOSED': closed_tickets,
+        'PENDING': pending_tickets
+    }
+
+    return JsonResponse(data)
+
+
+def TicketView(request):
+    complaints_qs = Complaints.objects.latest('date')
+    timestamp = complaints_qs.date.strftime("%b-%d-%Y %H:%M:%S")
+    context = {
+        'timestamp': timestamp
+    }
+
+    return render(request, 'complaintapp/charts.html', context)

@@ -4,7 +4,9 @@ from .views import (
     Dashboard,
     ViewDetails,
     ListPendingTasks,
-    AddTaskActions
+    AddTaskActions,
+    TicketStatus,
+    TicketView
 )
 
 app_name = 'complaintapp'
@@ -15,4 +17,6 @@ urlpatterns = [
     path('details/<int:complaintid>/', ViewDetails, name='details'),
     path('tasks/', ListPendingTasks, name='pendingtasks'),
     path('actions/<int:taskid>/', AddTaskActions, name='actions'),
+    path('charts/', TicketView, name='charts'),
+    path('api/v1/tickets/', TicketStatus, name='ticketstatus'),
 ]
