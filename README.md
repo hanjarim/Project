@@ -46,13 +46,13 @@ Open your browser and visit 127.0.0.1:8000
 * Bootstrap5
 
 ## System Architecture
-![Architecture](./static/img/arch.png)
+![Architecture](./complaintapp/static/img/arch.png)
 
 ## CI/CD Plan
-![cicd](./static/img/cicd.png)
+![cicd](./complaintapp/static/img/cicd.png)
 
 ## System structure
-![system](./static/img/system.png)
+![system](./complaintapp/static/img/system.png)
 
 ## Project contributors
 * Moses Kubo
