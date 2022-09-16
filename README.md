@@ -40,7 +40,7 @@ Open your browser and visit http://entdevnet.safaricom.net:8035/
 
 ## Technologies used
 * Python/Django
-* DBSqlite Database
+* Postgres Database
 * ChartJS
 * HTML5
 * Bootstrap5
