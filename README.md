@@ -55,7 +55,7 @@ Open your browser and visit 127.0.0.1:8000
 ![system](./complaintapp/static/img/system.png)
 
 ## Implemented Design
-![Working Design](./capstone/working.png)
+![Working Design](../capstone/working1.png)
 
 ## Project contributors
 * Moses Kubo
