@@ -54,6 +54,9 @@ Open your browser and visit 127.0.0.1:8000
 ## System structure
 ![system](./static/img/system.png)
 
+## Implemented Design
+![Working Design](./capstone/working.png)
+
 ## Project contributors
 * Moses Kubo
 * Kelvin Kangwe
