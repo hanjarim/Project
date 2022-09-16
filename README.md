@@ -55,7 +55,7 @@ Open your browser and visit http://entdevnet.safaricom.net:8035/
 ![system](./complaintapp/static/img/system.png)
 
 ## Implemented Design
-![Working Design](../capstone/working1.png)
+![Working Design](./complaintapp/static/img/working1.png)
 
 ## Project contributors
 * Moses Kubo
