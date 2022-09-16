@@ -1,5 +1,5 @@
 # Network Complaints Ticketing System
-![Homepage](./static/img/tickethomepage.png)
+![Homepage](./complaintapp/static/img/tickethomepage.png)
 ## Objectives
 This is the main project repository. We look towards building an interface that will be able to link various cross functional teams within the ogranization for purposes of improving the communications as relates to customer complaints. The main teams involved are: Customer care, NOC, SOC and Optimization teams. From receipt of comlaints to evaluation to forwarding to the team concerned with analysis, faulting and resolution, there s a need for seamless flow of work, quick and up to date feedback and accurate tracking of issues raised up to the point that each case is closed either via resolution or action that would ba carried out at a future date. The tool being developed also needs to be able to allow a user to check subsequent complaints by the same user, flag repeat complaints and allow users to feedback status to our customers. It is hoped that the tool would be simple to use, effective in giving accurate information as well as being easy to update and also track precisely the movement of work and information..
 
@@ -46,13 +46,13 @@ Open your browser and visit 127.0.0.1:8000
 * Bootstrap5
 
 ## System Architecture
-![Architecture](./static/img/arch.png)
+![Architecture](./complaintapp/static/img/arch.png)
 
 ## CI/CD Plan
-![cicd](./static/img/cicd.png)
+![cicd](./complaintapp/static/img/cicd.png)
 
 ## System structure
-![system](./static/img/system.png)
+![system](./complaintapp/static/img/system.png)
 
 ## Implemented Design
 ![Working Design](./capstone/working.png)
