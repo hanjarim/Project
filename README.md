@@ -36,7 +36,7 @@ Once all the dependencies are installed, run the following command in the termin
 ```
 python manage.py runserver
 ```
-Open your browser and visit 127.0.0.1:8000
+Open your browser and visit http://entdevnet.safaricom.net:8035/
 
 ## Technologies used
 * Python/Django
